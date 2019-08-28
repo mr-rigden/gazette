@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:cc="http://web.resource.org/cc/"
+    xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:media="http://search.yahoo.com/mrss/"
+    xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <channel>
+        <title>{{site.Title}}</title>
+        <copyright>{{site.Copyright}}</copyright>
+        <description>{{site.Description}}</description>
+        <generator>{{ rss.generator }}</generator>
+        <itunes:author>{{site.OwnerName}}</itunes:author>
+        {% for category in site.Categories %}{% if category.Parent %}
+        <itunes:category text="{{category.Parent|e}}">
+		    <itunes:category text="{{category.Name|e}}"/>
+        </itunes:category>
+        {% else %}
+        <itunes:category text="{{category.Name|e}}"/>
+        {% endif %}{% endfor %}
+        <itunes:image href="{{site.CoverArtURL}}" />
+        <itunes:explicit>{{site.Explicit}}</itunes:explicit>
+        <itunes:owner>
+            <itunes:name>{{site.OwnerName }}</itunes:name>
+            <itunes:email>{{site.OwnerEmail }}</itunes:email>
+        </itunes:owner>
+        <itunes:summary>{{site.Description}}</itunes:summary>
+        <itunes:type>episodic</itunes:type>        
+        <managingEditor>{{site.OwnerName}} ({{site.OwnerEmail}})</managingEditor>
+        <language>en-us</language>
+        <lastBuildDate>{{ rss.lastBuildDate}}</lastBuildDate>
+        <link>{{site.BaseURL}}</link>
+        <pubDate>{{ rss.pubDate}}</pubDate>
+
+
+        {% for episode in episodes %}
+        <item>
+            <title>{{ episode.Meta.Title|e}}</title>
+
+            <description>
+                <![CDATA[
+                    {{ episode.Summary|safe }}
+                ]]>
+            </description>
+            <enclosure url="{{ episode.Meta.Enclosure.StatsURL }}" length="{{ episode.Meta.Enclosure.Length }}" type="audio/mpeg"  />
+            <guid isPermaLink="false">{{ episode.Meta.Enclosure.URL }}</guid>
+            <itunes:duration>{{ episode.Meta.Enclosure.Duration }}</itunes:duration>
+            <itunes:explicit>{{ site.Explicit }}</itunes:explicit>
+            <itunes:subtitle>{{ episode.Meta.Subtitle|e }}</itunes:subtitle>
+            <itunes:title>{{ episode.Meta.Title|e}}</itunes:title>
+            <link>{{ site.BaseURL }}/{{ episode.Meta.Slug }}</link>
+            <pubDate>{{ episode.Meta.pubDate }}</pubDate>
+        </item>
+        {% endfor %}
+    </channel>
+</rss>

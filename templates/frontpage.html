@@ -1,0 +1,15 @@
+{% include 'top.html' %}
+{% for post in posts %}
+    {% if not post.meta.type == "page" %}
+        <div class="post">
+            <div class="post-header">
+                <h1><a href="{{baseURL}}/{{post.meta.slug}}">{{post.meta.title}}</a></h1>
+                <h4>{{ post.meta.datetime.strftime('%B %-d, %Y	') }}</h4>
+            </div>
+            <div class="post-body">
+                {{post.body|striptags|truncate(160) }}
+            </div>
+        </div>
+    {% endif %} 
+{% endfor %}
+{% include 'bottom.html' %}

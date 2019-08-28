@@ -1,0 +1,20 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    {% if content is defined %}
+    <title>{{ content.Meta.Title }}</title>
+    {% else %}
+    <title>{{ site.Title}}</title>
+    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% include 'metatags.html' %}
+
+    <link rel="stylesheet" href="https://files.ipsut.net/share/lib/normalize-8.0.1.css">
+    <style>{% include 'style.css' %}</style>
+
+    {{ site.header}}
+  
+</head>
+{% include 'navbar.html' %}
+<main>

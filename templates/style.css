@@ -1,0 +1,183 @@
+
+html {
+    font-size: 18px;
+    line-height: 1.5;
+    overflow-y: scroll;
+}
+
+
+h1,
+h2,
+h3,
+h3,
+h4,
+h5 {
+    font-weight: 800;
+    margin: 0px;
+    padding-top: 1rem;
+    text-transform: uppercase;
+    line-height: 1;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.5874rem;
+}
+
+h3 {
+    font-size: 1.2599rem;
+}
+
+h4 {
+    font-size: 1rem;
+}
+
+
+
+p {
+    text-align: justify;
+    margin: 0px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+nav {
+    font-weight: 800;
+    background: black;
+    color: white;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+
+
+}
+
+nav a:link,
+nav a:visited,
+footer a:link,
+footer a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-bar {
+    display: flex;
+
+}
+
+.nav-right {
+    flex: 1;
+
+    text-align: right;
+
+}
+
+.nav-left {
+    flex: 0 0 70%;
+    text-align: left;
+}
+
+#nav-menu {}
+
+#nav-menu ul {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+
+}
+
+#nav-menu li {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.hidden {
+    display: none;
+}
+
+main {
+    max-width: 40rem;
+    margin: 0 auto;
+
+}
+
+
+.post-body {
+    font-size: 1.25rem;
+}
+
+.post-image img {
+    padding-top: 1rem;
+    width: 100%;
+    height: auto;
+
+}
+
+.spacer {
+    height: 10rem;
+}
+
+.post {
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+a:link,
+a:visited {
+    text-decoration: none;
+    color: red;
+}
+
+.post-header h4 {
+    padding-top: 0px;
+}
+
+.post-body img {
+    width: 100%;
+    height: auto;
+
+}
+
+audio {
+    width: 100%;
+    padding-top: 1rem;
+}
+
+.subscribe-button {
+    text-align: center;
+}
+
+.subscribe-list {
+    padding: 0px;
+    list-style-type: none;
+    text-align: center;
+}
+
+.subscribe-list li {
+    padding-bottom: 1rem;
+}
+
+.cover-art img {
+    padding-top: 1rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: auto;
+}
+
+footer {
+    text-align: center;
+    padding: .75rem;
+    font-weight: bold;
+    font-size: .75rem;
+    background: black;
+    color: white;
+}

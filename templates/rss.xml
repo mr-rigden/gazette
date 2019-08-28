@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+<channel>
+    <title>{{site.title}}</title>
+    <link>{{site.baseURL}}</link>
+    <description>{{site.description}}</description>
+    <language>en-us</language>
+    <pubDate>{{rss.pubDate}}</pubDate>
+    <lastBuildDate>{{rss.pubDate}}</lastBuildDate>
+    <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+    <generator>{{rss.generator}}</generator>
+    <managingEditor>{{ site.email }}</managingEditor>
+    <webMaster>{{ site.email }}</webMaster>
+
+    {% for post in posts %}
+    <item>
+        <title>{{ post.title }}</title>
+        <link>{{site.baseURL}}/{{ post.meta.slug }}</link>
+        <description>
+            <![CDATA[
+                {{post.body|striptags|truncate(160) }}
+            ]]>
+        </description>
+        <pubDate>{{ post.meta.pubDate }}</pubDate>
+        <guid>{{site.baseURL}}/{{ post.meta.slug }}</guid>
+    </item>
+
+    </item>
+    {% endfor %}
+
+</channel>
+</rss>

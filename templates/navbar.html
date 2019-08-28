@@ -1,0 +1,26 @@
+<nav>
+    <div class="nav-bar">
+        <div class="nav-left">
+            <a href="{{site.baseURL}}">{{site.title}}</a>
+        </div>
+
+        <div class="nav-right">
+            <div id="hamburger">
+                &#9776;
+            </div>
+        </div>
+    </div>
+
+    <div id="nav-menu" class="hidden">
+        <ul>
+            {% for item in site.links %}
+            <li>
+                <a href="{{item.url}}">
+                        {{item.name}}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+</nav>
