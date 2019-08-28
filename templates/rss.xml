@@ -24,8 +24,6 @@
         <pubDate>{{ post.meta.pubDate }}</pubDate>
         <guid>{{site.baseURL}}/{{ post.meta.slug }}</guid>
     </item>
-
-    </item>
     {% endfor %}
 
 </channel>

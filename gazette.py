@@ -2,6 +2,8 @@ import argparse
 from datetime import datetime
 import logging
 import os
+from shutil import copyfile
+
 
 
 import dateutil.parser
@@ -32,12 +34,8 @@ env = jinja2.Environment(loader=file_loader)
 parser = argparse.ArgumentParser(description='A static site generator for blogs and podcasts. v' + VERSION)
 parser.add_argument("-v", "--verbose",  help="increase verbosity", action="store_true")
 parser.add_argument("-i", "--initialize", help="initialize site", action="store_true")
-#parser.add_argument("-r", "--render", help="render site", action="store_true")
 parser.add_argument('path', help="path to site")
 args = parser.parse_args()
-
-
-
 
 ##############################
 # Path Functions
@@ -59,6 +57,12 @@ def get_post_ending_path():
 
 def get_output_path():
     return os.path.join(site_path, "output")
+
+def get_resource_path():
+    return os.path.join(home_path, "resources")
+
+def get_tag_path():
+    return os.path.join(site_path, "tag")
 
 ##############################
 # Load Site Functions
@@ -111,6 +115,7 @@ def load_post(file_path):
     meta['pubDate'] = meta['datetime'].strftime("%a, %d %b %Y %H:%M:%S") + " GMT"
     post['body'] = markdown.markdown(split_data[1])
     post['meta'] = meta
+    post['meta']['tags'] = process_tags(post['meta']['tags'])
     return post
 
 def get_posts():
@@ -128,15 +133,34 @@ def get_posts():
 
 def render_site():
     site = read_config()
+    site['version'] = VERSION
     site['footer'] = read_footer()
     site['header'] = read_header()
     site['post_ending'] = read_post_ending()
+    make_robots_txt()
+    copy_favicon(site)
+    make_tag_dir()
     posts = get_posts()
     render_front_page(site, posts)
     render_site_map(site, posts)
     render_rss(site, posts)
+    render_css(site)
+
     for post in posts:
         render_post(site, post)
+
+    tags = get_all_tags(posts)
+    for tag in tags:
+        render_tag(site, posts, tag)
+
+def render_css(site):
+    file_name = 'v' + site['version'] + "-gazette.css"
+    file_path = os.path.join(get_output_path(), file_name)
+    template = env.get_template('style.css')
+    output = template.render()
+    with open(file_path, 'w') as f:
+        f.write(output)
+
 
 def render_front_page(site, posts):
     file_path = os.path.join(get_output_path(), "index.html")
@@ -175,6 +199,24 @@ def render_site_map(site, posts):
         f.write(output)
 
 
+def render_tag(site, posts, tag):
+    selected_posts = []
+    for post in posts:
+        for each in post['meta']['tags']:
+            if each['name'] == tag:
+                selected_posts.append(post)
+    #file_name = slugify(tag) + ".html"
+    dir = os.path.join(get_output_path(), 'tag', slugify(tag))
+    if not os.path.exists(dir):
+        os.mkdir(dir)
+
+    file_path = os.path.join(dir, 'index.html')
+    print(file_path)
+    template = env.get_template('tag.html')
+    output = template.render(tag=tag, site=site, posts=posts)
+    with open(file_path, 'w') as f:
+        f.write(output)
+    
 
 
 ##############################
@@ -186,7 +228,11 @@ def make_config_file():
     config_template = {
         "author": "",
         "baseURL": "",
-        "title": ""
+        "title": "",
+        "links": [{
+            "url": "",
+            "name": ""
+            },]
     }
     with open(get_config_path(), 'w') as f:
         f.write(yaml.dump(config_template))
@@ -220,13 +266,53 @@ Disallow:    """
     with open(robots_path, 'w') as f:
         f.write(body)
 
+def copy_favicon(site):
+    site_ico_path = os.path.join(get_output_path(), "favicon.ico")
+    custom_ico_path = os.path.join(get_content_path(), "favicon.ico")
+    default_ico_path = os.path.join(get_resource_path(), "favicon.ico")
+
+    if os.path.isfile(site_ico_path):
+        return
+    if os.path.isfile(custom_ico_path):
+        copyfile(custom_ico_path, site_ico_path)
+        return
+    copyfile(default_ico_path, site_ico_path)
+
+    
+
+
 
 def initialize_new_site():
     make_config_file()
     make_site_directories()
-    make_robots_txt()
     make_empty_files()
 
+##############################
+# Taxonomy Functions 
+##############################
+
+def process_tags(raw_tags):
+    tags = []
+    for each in raw_tags:
+        tag = {}
+        tag['name'] = each.lower()
+        tag['slug'] = slugify(tag['name'])
+        tags.append(tag)
+    return tags
+
+def get_all_tags(posts):
+    tags = []
+    for post in posts:
+        for tag in post['meta']['tags']:
+            tags.append(tag['name'])
+    tags = list(set(tags))
+    return tags
+
+
+def make_tag_dir():
+    path = os.path.join(get_output_path(), 'tag')
+    if not os.path.exists(path):
+        os.mkdir(path)
 
 ##############################
 # Main

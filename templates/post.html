@@ -16,7 +16,13 @@
         {{post.body }}
         {{ site.post_ending}}
 
-    </div>
+        <div class="post-footer">
+                Tags:{{tag}}
+                {% for tag in post.meta.tags %}
+                <a href="{{baseURL}}/tag/{{tag.slug}}">{{tag.name}}</a>{% if not loop.last %}, {% endif %}
+                {% endfor %} 
+        
+        </div>
 </div>
 
 {% include 'bottom.html' %}

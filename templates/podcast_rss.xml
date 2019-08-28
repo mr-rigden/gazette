@@ -1,3 +1,36 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+   <channel>
+    <title>{{site.Title}}</title>
+    <copyright>{{site.Copyright}}</copyright>
+    <description>{{site.Description}}</description>
+    <generator>{{ rss.generator }}</generator>
+    <language>en-us</language>
+    <lastBuildDate>{{ rss.lastBuildDate}}</lastBuildDate>
+    <link>{{site.BaseURL}}</link>
+    <managingEditor>{{site.OwnerName}} ({{site.OwnerEmail}})</managingEditor>
+    <pubDate>{{rss.pubDate}}</pubDate>
+    <webMaster>{{site.OwnerEmail}}</webMaster>
+
+    {% for episode in episodes %}
+    <item>
+        <title>{{ episode.Meta.Title|e}}</title>
+        <description>
+        <![CDATA[
+        {{ episode.Summary|safe }}
+        ]]>
+        </description>
+        <guid isPermaLink="false">{{ episode.Meta.Enclosure.URL }}</guid>
+        <link>{{ site.BaseURL }}/{{ episode.Meta.Slug }}</link>
+        <pubDate>{{ episode.Meta.pubDate }}</pubDate>
+    </item>
+    {% endfor %}
+
+
+   </channel>
+</rss>
+===========================
+
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:cc="http://web.resource.org/cc/"
     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" xmlns:media="http://search.yahoo.com/mrss/"
