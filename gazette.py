@@ -211,7 +211,6 @@ def render_tag(site, posts, tag):
         os.mkdir(dir)
 
     file_path = os.path.join(dir, 'index.html')
-    print(file_path)
     template = env.get_template('tag.html')
     output = template.render(tag=tag, site=site, posts=posts)
     with open(file_path, 'w') as f:
