@@ -115,9 +115,7 @@ def load_post(file_path):
     meta['pubDate'] = meta['datetime'].strftime("%a, %d %b %Y %H:%M:%S") + " GMT"
     #post['body'] = markdown.markdown(split_data[1])
     post['body'] = split_data[1]
-    print(post['body'])
     meta['description'] = re.sub(re.compile('<.*?>'), '', post['body'])[:160]
-    print(meta['description'])
     post['meta'] = meta
     post['meta']['tags'] = process_tags(post['meta']['tags'])
     return post
