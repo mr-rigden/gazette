@@ -3,7 +3,7 @@ from datetime import datetime
 import logging
 import os
 from shutil import copyfile
-
+import re
 
 
 import dateutil.parser
@@ -16,7 +16,7 @@ import yaml
 # Global Constants
 ####################
 
-VERSION = "0.1.0"
+VERSION = "0.1.1"
 CONTENT_SEPARATOR = '=========='
 GENERATOR = 'redmercury '+ VERSION +' (https://github.com/jrigden/redmercury)'
 
@@ -99,7 +99,7 @@ def read_post_ending():
 def get_post_paths():
     paths = []
     for each in os.listdir(get_content_path()):
-        if each.endswith(".md"):
+        if each.endswith(".html"):
             post_path = os.path.join(get_content_path(), each)
             paths.append(post_path)
     return paths
@@ -113,7 +113,11 @@ def load_post(file_path):
     meta['slug'] = slugify(meta['title'])
     meta['datetime'] = dateutil.parser.parse(meta['date'])
     meta['pubDate'] = meta['datetime'].strftime("%a, %d %b %Y %H:%M:%S") + " GMT"
-    post['body'] = markdown.markdown(split_data[1])
+    #post['body'] = markdown.markdown(split_data[1])
+    post['body'] = split_data[1]
+    print(post['body'])
+    meta['description'] = re.sub(re.compile('<.*?>'), '', post['body'])[:160]
+    print(meta['description'])
     post['meta'] = meta
     post['meta']['tags'] = process_tags(post['meta']['tags'])
     return post

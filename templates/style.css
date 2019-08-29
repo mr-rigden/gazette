@@ -50,8 +50,8 @@ h4 {
 p {
     text-align: justify;
     margin: 0px;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
 }
 
 nav {
@@ -190,4 +190,33 @@ footer {
     font-size: .75rem;
     background: black;
     color: white;
+}
+
+ul, ol {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-left: 2rem;
+}
+
+ul {
+    list-style-type: disc;
+}
+
+ol {
+    list-style-type:decimal;
+
+}
+
+blockquote {
+    font-style: italic;
+    padding: 1rem;
+    margin: 1rem;
+    background-color: lightgray;
+}
+
+.post-footer {
+    padding-top: 1rem; 
+    padding-bottom: 1rem; 
+    font-style: italic;
+
 }

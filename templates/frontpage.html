@@ -7,7 +7,7 @@
                 <h4>{{ post.meta.datetime.strftime('%B %-d, %Y	') }}</h4>
             </div>
             <div class="post-body">
-                {{post.body|striptags|truncate(160) }}
+                <p>{{ post.meta.description }}</p>
             </div>
         </div>
     {% endif %} 
