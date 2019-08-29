@@ -262,7 +262,7 @@ def make_robots_txt():
 
 # Allow crawling of all content
 User-agent: *
-Disallow:    """
+Disallow:   /tag/* """
     robots_path = os.path.join(get_output_path(), "robots.txt")
     with open(robots_path, 'w') as f:
         f.write(body)
