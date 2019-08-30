@@ -103,7 +103,29 @@ Some setting in this file are optional
     canonicalURL: 'https://rigden.dev/sample'
 Adding this is change the canonical link metatag.
 
+## Performance
+
+The `faker.site.py` script allows you to generate fake content for testing. We'll be using this to test performance. As always performance will vary based on your machine. Here are the number from my machine. Also there will be variability considering the random tags. But, it should give you a decent idea.
+
+For a site with 10 posts and a random number of tags:
+
+    0.355s
+
+For a site with 100 posts and a random number of tags:
+
+    2.680s
+
+For a site with 1000 posts and a random number of tags:
+
+    1m 3.475s
+
+ For a site with 1000 posts and no tags:
+ 
+    1.596s
+
 ## History
+The program is under active development. Once thing stabalize, I'll start updating the history.
+
 * August 29, 2019 - Initial testing release v0.1.1 
 
 ## Authors
