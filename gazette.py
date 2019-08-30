@@ -141,6 +141,7 @@ def render_site():
     site['post_ending'] = read_post_ending()
     make_robots_txt()
     copy_favicon(site)
+    render_404(site)
     make_tag_dir()
     posts = get_posts()
     render_front_page(site, posts)
@@ -200,6 +201,17 @@ def render_site_map(site, posts):
     with open(file_path, 'w') as f:
         f.write(output)
 
+def render_404(site):
+    dir = os.path.join(get_output_path(), "404")
+    file_path = os.path.join(dir, "index.html")
+    if not os.path.exists(dir):
+        os.mkdir(dir)
+    template = env.get_template('404.html')
+    output = template.render(site=site)
+    with open(file_path, 'w') as f:
+        f.write(output)
+
+
 
 def render_tag(site, posts, tag):
     selected_posts = []
@@ -258,6 +270,10 @@ def make_empty_files():
 
 
 def make_robots_txt():
+    robots_txt = os.path.join(get_resource_path(), "robots.txt")
+    if os.path.isfile(robots_txt):
+        return
+
     body = """# www.robotstxt.org/
 
 # Allow crawling of all content

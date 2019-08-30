@@ -1,5 +1,10 @@
     {% if post is defined %}
-    <meta name="description" Xcontent="{{ post.meta.description }}">
+        <meta name="description" content="{{ post.meta.description }}">
+        {% if post.meta.canonicalURL is defined %}
+            <link rel="canonical" href="{{post.meta.canonicalURL}}" />
+        {% else %}
+            <link rel="canonical" href="{{site.baseURL}}/{{post.meta.slug}}" />
+        {% endif %}
     {% else %}
     <meta name="description" content="{{ site.description }}">
     {% endif %}

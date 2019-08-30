@@ -69,6 +69,39 @@ Pointing gazette at an initialized directory with no arguements with render the 
 
     python gazette.py ~/sites/demo.rigden.dev
 
+## Site Configuration
+`config.yaml` contain your site specific settings. After initialization the contents of file of the site will look something like this. 
+
+    title: ''
+    author: ''
+    baseURL: ''
+    links:
+    - name: ''
+      url: ''
+
+* title - This is the title of the site.
+* author - This is the name of the author of the site.
+* baseURL: This generally will be the domain name of the site.
+* links: This is the list used to build the navigation menu.
+
+## Creating a post
+Properly structured files will be turned into pages for the site. Files should even in `.html`. The following is a sample post.
+
+    title: 'This is a sample post'
+    date: '8/26/2019'
+    canonicalURL: 'aplha'
+    tags: 
+    - 'dog'
+    - 'cat'
+    ==========
+The file is divided by ten `=` symbols. Everything above `=========` will be read as `yaml` and used to generate the page. Every thing below will copied as the body of the post.
+
+### Optional
+Some setting in this file are optional
+
+    canonicalURL: 'https://rigden.dev/sample'
+Adding this is change the canonical link metatag.
+
 ## History
 * August 29, 2019 - Initial testing release v0.1.1 
 
