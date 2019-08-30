@@ -99,7 +99,7 @@ def read_post_ending():
 def get_post_paths():
     paths = []
     for each in os.listdir(get_content_path()):
-        if each.endswith(".html"):
+        if each.endswith(".html") or each.endswith(".md"):
             post_path = os.path.join(get_content_path(), each)
             paths.append(post_path)
     return paths
@@ -113,8 +113,11 @@ def load_post(file_path):
     meta['slug'] = slugify(meta['title'])
     meta['datetime'] = dateutil.parser.parse(meta['date'])
     meta['pubDate'] = meta['datetime'].strftime("%a, %d %b %Y %H:%M:%S") + " GMT"
-    #post['body'] = markdown.markdown(split_data[1])
-    post['body'] = split_data[1]
+    if file_path.endswith(".html"):
+        post['body'] = split_data[1]
+    elif file_path.endswith(".md"):
+        print("Monkey!")
+        post['body'] = markdown.markdown(split_data[1])
     meta['description'] = re.sub(re.compile('<.*?>'), '', post['body'])[:160]
     post['meta'] = meta
     post['meta']['tags'] = process_tags(post['meta']['tags'])
