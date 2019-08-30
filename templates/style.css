@@ -20,8 +20,7 @@ h1,
 h2,
 h3,
 h3,
-h4,
-h5 {
+h4 {
     font-weight: 800;
     margin: 0px;
     padding-top: 1rem;
@@ -99,6 +98,8 @@ footer a:visited {
     margin: 0px;
     padding: 0px;
     list-style-type: none;
+    padding-top: 1rem;
+
 
 }
 
@@ -124,9 +125,10 @@ main {
 }
 
 .post-image img {
-    padding-top: 1rem;
     width: 100%;
     height: auto;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
 
 }
 
@@ -152,6 +154,8 @@ a:visited {
 .post-body img {
     width: 100%;
     height: auto;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
 
 }
 
@@ -210,7 +214,8 @@ ol {
 blockquote {
     font-style: italic;
     padding: 1rem;
-    margin: 1rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     background-color: lightgray;
 }
 
