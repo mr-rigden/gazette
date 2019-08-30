@@ -24,6 +24,7 @@ def generate_title():
 def generate_tags():
     number = random.randint(0,8)
     tags = fake.words(nb=number, ext_word_list=None, unique=False)
+    #tags = []
     return tags
 
 
