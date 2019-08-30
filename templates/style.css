@@ -216,7 +216,7 @@ blockquote {
     padding: 1rem;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    background-color: lightgray;
+    background-color: #E8E8E8;
 }
 
 .post-footer {
@@ -224,4 +224,8 @@ blockquote {
     padding-bottom: 1rem; 
     font-style: italic;
 
+}
+
+strong {
+    font-weight: bold;
 }
